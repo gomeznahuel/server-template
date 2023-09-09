@@ -1,5 +1,5 @@
-import productModel from "./models/Product";
-import { IProduct } from "../databases/mongodb/interfaces/product.interface";
+import productModel from "./mongodb/model/product.model";
+import { IProduct } from "./mongodb/interfaces/product.interface";
 
 export default class Product {
   get = (params: Record<string, any>) => {

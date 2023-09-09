@@ -1,16 +1,16 @@
-import { connection } from "../../databases/mysql";
+import { connection } from "./sql/index";
 
-class MySQLDao {
-  async getProducts() {
+export default class ProductFromMySQL {
+  get = async (params: Record<string, any>) => {
     return new Promise((resolve, reject) => {
       connection.query("SELECT * FROM productos_tabla", (err, results) => {
         if (err) reject(err);
         resolve(results);
       });
     });
-  }
+  };
 
-  async getProductById(id: string) {
+  getById = async (id: string) => {
     return new Promise((resolve, reject) => {
       connection.query(
         "SELECT * FROM productos_tabla WHERE id_producto = ?",
@@ -22,21 +22,18 @@ class MySQLDao {
         }
       );
     });
-  }
+  };
 
-  async createProduct(product: any) {
+  save = async (data: Record<string, any>) => {
     return new Promise((resolve, reject) => {
       connection.query(
         "INSERT INTO productos_tabla SET ?",
-        [product],
+        [data],
         (err, results) => {
           if (err) reject(err);
           resolve(results);
         }
       );
     });
-  }
+  };
 }
-
-const mySQLDao = new MySQLDao();
-export { mySQLDao };

@@ -1,6 +1,6 @@
 import express, { Express } from "express";
 import { json, urlencoded } from "body-parser";
-import { dbConnection, initialize } from "./databases";
+import { dbConnection, initialize } from "./dao";
 import { productRouter } from "./routes";
 import { handleErrorMiddleware, routeNotFoundMiddleware } from "./middlewares";
 import { startExpressServerWithLogging } from "./utils";
