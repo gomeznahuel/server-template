@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 
-export const reusableSchemaMethods = (
+export const applyReusableSchemaMethods = (
   schema: Schema,
   fields: string[] = []
 ) => {

@@ -1,1 +1,2 @@
-export { default as handleErrorMiddleware } from "./handleErrorMiddleware";
+export { handleErrorMiddleware } from "./handleError.middleware";
+export { routeNotFoundMiddleware } from "./routeNotFound.middleware";

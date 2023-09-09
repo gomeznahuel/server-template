@@ -21,7 +21,7 @@ export class ProductsService {
 
   static async createProduct(product: any) {
     try {
-      const dao = DaoFactory.getDao(DaoNames.MYSQL);
+      const dao = DaoFactory.getDao(DaoNames.MONGODB);
       return await dao.createProduct(product);
     } catch (error) {
       throw error;

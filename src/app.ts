@@ -1,13 +1,9 @@
 import express, { Express } from "express";
-import dotenv from "dotenv";
 import { json, urlencoded } from "body-parser";
-import { dbConnection } from "./databases";
-import { initialize } from "./databases/mysql";
-import { productRoutes } from "./routes/product.route";
-import { handleErrorMiddleware } from "./middlewares";
+import { dbConnection, initialize } from "./databases";
+import { productRouter } from "./routes";
+import { handleErrorMiddleware, routeNotFoundMiddleware } from "./middlewares";
 import { startExpressServerWithLogging } from "./utils";
-
-dotenv.config();
 
 export class Server {
   private app: Express;
@@ -29,7 +25,8 @@ export class Server {
   }
 
   private setupRoutes() {
-    this.app.use("/", productRoutes);
+    this.app.use("/", productRouter);
+    this.app.use(routeNotFoundMiddleware);
   }
 
   private async listen() {
@@ -44,7 +41,7 @@ export class Server {
     this.configureMiddleware();
     this.setupRoutes();
     this.connectToDatabase();
-    this.errorHandler();
     this.listen();
+    this.errorHandler();
   }
 }

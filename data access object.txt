@@ -1,0 +1,45 @@
+users.router => userController.getAllUsers
+
+// userController tiene las funciones del CRUD.
+userController.getAllUsers => usersService.getAll()
+
+// usersServices.getAll() solo importa y exporta.
+
+// Modelo
+import Pet from "../dao/Pets.dao.js";
+import PetRepository from "../repository/PetRepository.js";
+export const petsService = new PetRepository(new Pet());
+
+// Pets.dao.js
+import petModel from "./models/Pet.js";
+
+export default class Pet {
+  get = (params) => {
+    return petModel.find(params);
+  };
+
+  getBy = (params) => {
+    return petModel.findOne(params);
+  };
+
+  save = (doc) => {
+    return petModel.create(doc);
+  };
+
+  update = (id, doc) => {
+    return petModel.findByIdAndUpdate(id, { $set: doc });
+  };
+
+  delete = (id) => {
+    return petModel.findByIdAndDelete(id);
+  };
+}
+
+// PetRepository
+import GenericRepository from "./GenericRepository.js";
+
+export default class PetRepository extends GenericRepository {
+  constructor(dao) {
+    super(dao);
+  }
+}

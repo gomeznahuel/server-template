@@ -1,1 +1,1 @@
-export * from "./reusableSchemaMethods";
+export * from "./applyReusableSchemaMethods";
